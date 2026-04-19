@@ -1,68 +1,72 @@
-//импорт react
+//импортируем react для создания компонентов 
 import React from 'react';
-//импорт styled-components
+//импортируем styled-components для написания css внутри js
 import styled from 'styled-components';
 
-//стили блока даты
+//стили для блока даты
 const DateWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 5.5rem;
-  height: 5.5rem;
-  border: 1px solid #ececec;
-  background-color: #2a2a2a;
-  color: white;
-  border-radius: 12px;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem;
+  display: flex; //включаем flex для расположения элементов
+  flex-direction: column; //располагаем элементы сверху вниз
+  width: 5.5rem; //ширина блока даты
+  height: 5.5rem; //высота блока даты
+  border: 1px solid #ececec; //добавляем рамку вокруг блока
+  background-color: #2a2a2a; //задаем темный фон
+  color: white; //делаем текст белым
+  border-radius: 12px; //скругляем углы блока
+  align-items: center; //выравниваем элементы по горизонтали по центру
+  justify-content: center; //выравниваем элементы по вертикали по центру
+  margin: 1rem; //делаем внешний отступ
 `;
 
 //стили дня
 const Day = styled.div`
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.5rem; //задаю размер шрифта
+  font-weight: bold; //делаю текст жирным
 `;
 
 //стили месяца
 const Month = styled.div`
-  font-size: 0.75rem;
-  font-weight: bold;
+  font-size: 0.75rem; //размер шрифта меньше
+  font-weight: bold; //делаю текст жирным
 `;
 
 //стили года
 const Year = styled.div`
-  font-size: 0.75rem;
+  font-size: 0.75rem; //размер шрифта для года
 `;
 
-//компонент даты
+//создаем компонент ExpenseDate
 const ExpenseDate = (props) => {
-  //получаю дату из props
+  //получаем дату из props
   const expenseDate = props.date;
-  //получаю год
+  //получаем год
   const year = expenseDate.getFullYear();
-  //получаю название месяца
+  //получаем название месяца
   const month = expenseDate.toLocaleString("en-US", {
-    month: "long"
+    month: "long" //показываю месяц словом
   });
-  //получаю день
+  //получаем день
   const day = expenseDate.toLocaleString("en-US", {
-    day: "2-digit"
+    day: "2-digit" //показываем день двумя цифрами
   });
 
-  //возвращаю интерфейс
+  //возвращаем интерфейс
   return (
+    //отображаем блок даты
     <DateWrapper>
-      {/*вывожу день*/}
+      {/*выводим день*/}
       <Day>
+        {/*подставляем значение day*/}
         {day}
       </Day>
-      {/*вывожу месяц*/}
+      {/*выводим месяц*/}
       <Month>
+        {/*подставляем значение month*/}
         {month}
       </Month>
-      {/*вывожу год*/}
+      {/*выводим год*/}
       <Year>
+        {/*подставляем значение year*/}
         {year}
       </Year>
     </DateWrapper>

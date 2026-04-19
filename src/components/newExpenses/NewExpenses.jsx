@@ -1,31 +1,33 @@
-//импорт формы добавления расходов
+//импортируем форму добавления расходов
 import ExpenseForm from './ExpenseForm';
-//импорт css модуля
+//импортируем css модуль
 import styles from './NewExpenses.module.css';
-//импорт карточки
+//импортируем карточку
 import Card from '../ui/Card';
 
-//компонент добавления расходов
+//создаем компонент добавления расходов
 const NewExpenses = (props) => {
-  //функция получает новый расход из формы
+  //создаем функцию получения нового расхода из формы
   const getExpenseHandler = (expense) => {
-    //создаю новый объект и добавляю id
+    //создаем новый объект расхода
     const expenseWithId = {
-      ...expense,
-      id: Math.random().toString()
+      ...expense, //копируем все свойства объекта expense
+      id: Math.random().toString() //создаем уникальный id
     };
-    //передаю новый расход в App
+
+    //передаем новый расход в App
     props.onAdd(expenseWithId);
   };
 
-  //возвращаю интерфейс
+  //возвращаем интерфейс
   return (
+    //отображаем карточку со стилями
     <Card className={styles['new-expense']}>
-      {/*передаю функцию в форму*/}
+      {/*передаем функцию в форму*/}
       <ExpenseForm onGet={getExpenseHandler} />
     </Card>
   );
 };
 
-//экспорт компонента
+//экспортируем компонент
 export default NewExpenses;

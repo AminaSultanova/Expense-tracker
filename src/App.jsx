@@ -1,33 +1,31 @@
-//импорт useState для работы с состоянием
+//импортируем useState для работы с состоянием
 import { useState } from 'react';
-//импорт styled-components для стилей
+//импортируем styled-components для написания стилей
 import styled from 'styled-components';
-//импорт компонента со списком расходов
+//импортируем компонент списка расходов
 import Expenses from './components/expenses/Expenses';
-//импорт формы добавления расходов
+//импортируем форму добавления расходов
 import NewExpenses from './components/newExpenses/NewExpenses';
 
-//начальные данные рсходов
+//создаем начальный массив расходов
 const DUMMY_EXPENSES = [
-  //первый расход
+  //создаем первый объект расхода
   {
-    //id расхода
-    id: 1,
-    //название покупки
-    title: "Cola",
-    //цена
-    price: 100,
-    //дата
-    date: new Date(2025, 1, 12)
+    id: 1, //задаем id
+    title: "Cola", //задаем название
+    price: 100, //задаем цену
+    date: new Date(2025, 1, 12) //создаем дату
   },
-  //второй расход
+
+  //создаем второй объект расхода
   {
     id: 2,
     title: "Carpet",
     price: 2500,
     date: new Date(2026, 10, 9)
   },
-  //третий расход
+
+  //создаем третий объект расхода
   {
     id: 3,
     title: "Sofa",
@@ -36,51 +34,50 @@ const DUMMY_EXPENSES = [
   },
 ];
 
-
-//основной контейнер со стилями
+//создаем основной контейнер со стилями
 const AppWrapper = styled.div`
-  /* выравнивание по центру */
-  text-align: center;
+  text-align: center; //выравниваем содержимое по центру
 `;
 
-
-//главный компонент
+//создаем главный компонент
 function App() {
-  //создаю состояние для хранения расходов
+  //создаем состояние списка расходов
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
-  //функция добавления новой траты
+
+  //создаем функцию добавления расхода
   const addExpenseHandler = (expense) => {
-    //обнлвляю список расходов
+    //обновляем список расходов
     setExpenses((prevExpenses) => {
-      //добавляю новую запись в начало массива
+      //добавляем новую запись в начало массива
       return [expense, ...prevExpenses];
     });
   };
 
-  //функция удаления расхода
+  //создаем функцию удаления расхода
   const deleteExpenseHandler = (id) => {
-    //обновляю список после удаления
+    //обновляем список после удаления
     setExpenses((prevExpenses) => {
-      // оставляю только те расходы id которых не совпадает
+      //фильтруем массив и исключаем удаляемый объект
       return prevExpenses.filter(
         (expense) => expense.id !== id
       );
     });
   };
 
-  //возвращаю интерфейс
+  //возвращаем интерфейс
   return (
     <AppWrapper>
-      {/*передаю функцию добавления */}
+      {/*передаем функцию добавления*/}
       <NewExpenses onAdd={addExpenseHandler} />
-      {/*передаю список расходов и удаление */}
+
+      {/*передаем список расходов и функцию удаления*/}
       <Expenses
-        expenses={expenses}
-        onDeleteExpense={deleteExpenseHandler}
+        expenses={expenses} //передаем массив расходов
+        onDeleteExpense={deleteExpenseHandler} //передаем удаление
       />
     </AppWrapper>
   );
 }
 
-//экспорт компонента
+//экспортируем компонент
 export default App;

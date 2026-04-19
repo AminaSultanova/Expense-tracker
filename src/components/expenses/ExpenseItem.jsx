@@ -1,144 +1,101 @@
-//импорт styled-components для стилей
+//импортируем styled-components для стилей
 import styled from 'styled-components';
-//импорт компонента даты
+//импортируем компонент даты
 import ExpenseDate from './ExpenseDate';
 
-//создаю стили для карточки расхода
+
+//создаем стили для карточки расхода
 const Item = styled.div`
-  //flex для ррасположения элементов в строку
-  display: flex;
-  //раздвигаю элементы по сторонам
-  justify-content: space-between;
-  //выравнивание по центру
-  align-items: center;
-  //тень карточки
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  //внутренний отступ
-  padding: 0.5rem;
-  //отступ между карточками
-  margin: 1rem 0;
-  //скругление углов
-  border-radius: 12px;
-  //цвет фона карточки
-  background-color: #4b4b4b;
+  display: flex; //включаем flex для расположения элементов
+  justify-content: space-between; //раздвигаем элементы по сторонам
+  align-items: center; //выравниваем элементы по центру
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25); //добавляем тень
+  padding: 0.5rem; //добавляем внутренний отступ
+  margin: 1rem 0; //отступ между карточками
+  border-radius: 12px; //скругляем углы
+  background-color: #4b4b4b; //цвет фона
 `;
 
-//стили для блока с названием ценой и кнопкой
-const Description = styled.div`
-  //использую flex
-  display: flex;
-  //на маленьких экранах элементы идут колонкой
-  flex-direction: column;
-  //расстояние между элементами
-  gap: 1rem;
-  //выравнивание вправо
-  align-items: flex-end;
-  //обратный порядок в колонке
-  flex-flow: column-reverse;
-  //выравнивание элементов
-  justify-content: flex-start;
-  //занимает доступное место
-  flex: 1;
 
-  //стили для заголовка
+//создаем стили для блока описания
+const Description = styled.div`
+  display: flex; //включаем flex
+  flex-direction: column; //на маленьких экранах элементы колонкой
+  gap: 1rem; //расстояние между элементами
+  align-items: flex-end; //выравниваем вправо
+  flex-flow: column-reverse; //обратный порядок элементов
+  justify-content: flex-start; //выравниваем элементы
+  flex: 1; //занимаем доступное место
+
   h2 {
-    //размер текста
-    font-size: 1rem;
-    //отступы
-    margin: 0 1rem;
-    //цвет текста
-    color: white;
+    font-size: 1rem; //размер текста
+    margin: 0 1rem; //отступы
+    color: white; //цвет текста
   }
 
-  //стили для экранов от 580px
   @media (min-width: 580px) {
-    //элементы снова в строку
-    flex-direction: row;
-    //выравнивание по центру
-    align-items: center;
-    //выравнивание слева
-    justify-content: flex-start;
+    flex-direction: row; //на больших экранах элементы в строку
+    align-items: center; //выравниваем по центру
+    justify-content: flex-start; //выравниваем слева
 
     h2 {
-      //увеличиваю шрифт
-      font-size: 1.25rem;
+      font-size: 1.25rem; //увеличиваем шрифт
     }
   }
 `;
 
-//стили блока цены
+//создаем стили для цены
 const Price = styled.div`
-  //размер шрифта
-  font-size: 1rem;
-  //жирный текст
-  font-weight: bold;
-  //цвет текста
-  color: white;
-  //фон цены
-  background-color: #40005d;
-  //граница
-  border: 1px solid white;
-  //внутренние отступы
-  padding: 0.5rem;
-  //скругление
-  border-radius: 12px;
-
+  font-size: 1rem; //размер текста
+  font-weight: bold; //делаем текст жирным
+  color: white; //цвет текста
+  background-color: #40005d; //фон цены
+  border: 1px solid white; //добавляем границу
+  padding: 0.5rem; //внутренний отступ
+  border-radius: 12px; //скругляем углы
   @media (min-width: 580px) {
-    //размер шрифта на больших экранах
-    font-size: 1.25rem;
-    //отступы больше
-    padding: 0.5rem 1.5rem;
+    font-size: 1.25rem; //увеличиваем шрифт
+    padding: 0.5rem 1.5rem; //увеличиваем отступы
   }
 `;
 
-//стили кнопки удаления
+
+//создаем стили кнопки удаления
 const DeleteButton = styled.button`
-  //цвет кнопки
-  background-color: #5c0a0a;
-  //цвет текста
-  color: white;
-  //граница
-  border: 1px solid white;
-  //внутренние отступы
-  padding: 0.6rem 1.5rem;
-  //скругление
-  border-radius: 12px;
-  //курсор
-  cursor: pointer;
-  //отступ слева
-  margin-left: 2rem;
-
-  //цвет при наведении
+  background-color: #5c0a0a; //цвет кнопки
+  color: white; //цвет текста
+  border: 1px solid white; //граница
+  padding: 0.6rem 1.5rem; //внутренние отступы
+  border-radius: 12px; //скругление
+  cursor: pointer; //курсор при наведении
+  margin-left: 2rem; //отступ слева
   &:hover {
-    background-color: #7a1010;
+    background-color: #7a1010; //цвет при наведении
   }
-
-  //эффект нажатия
   &:active {
-    transform: scale(0.98);
+    transform: scale(0.98); //эффект нажатия
   }
 `;
 
-
-//компонент одной траты
+//создаем компонент одной траты
 const ExpenseItem = (props) => {
-  //возвращаю карточку
+  //возвращаем карточку
   return (
     <Item>
-      {/*передаю дату в компонент даты*/}
+      {/*передаем дату в компонент даты*/}
       <ExpenseDate date={props.expense.date} />
       <Description>
-        {/*вывожу название*/}
+        {/*выводим название*/}
         <h2>
           {props.expense.title}
         </h2>
-        {/*вывожу цену*/}
+        {/*выводим цену*/}
         <Price>
           {props.expense.price} KGS
         </Price>
-        {/*кнопка удаления*/}
+        {/*создаем кнопку удаления*/}
         <DeleteButton
-          //при клике удаляю по id
+          //при нажатии удаляем по id
           onClick={() => props.onDelete(props.expense.id)}
         >
           Delete
@@ -146,7 +103,9 @@ const ExpenseItem = (props) => {
       </Description>
     </Item>
   );
+
 };
 
-//экспорт компонента
+
+//экспортируем компонент
 export default ExpenseItem;

@@ -1,19 +1,18 @@
-//импорт react
+//импортируем react
 import React from 'react';
 
-//компонент кнопки
+//создаем компонент кнопки
 const Button = ({children, onClick}) => {
-  //возвращаю кнопку
+  //возвращаем кнопку
   return (
     <button
-      //обработка клика
-      onClick={onClick}
+      onClick={onClick} //передаем обработчик клика
     >
-      {/*текст кнопки*/}
+      {/*выводим текст кнопки*/}
       {children}
     </button>
   );
 };
 
-//экспорт компонента
+//экспортируем компонент
 export default Button;

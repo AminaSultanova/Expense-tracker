@@ -1,103 +1,77 @@
-//импорт react и useState
+//импортируем react и useState для работы с компонентом и состоянием
 import React, { useState } from 'react';
-//импорт styled-components для стилей
+//импортируем styled-components для написания стилей
 import styled from 'styled-components';
-//импорт кнопки
+//импортируем кнопку
 import Button from '../ui/Button';
 
-//стили для общего блока inputs
+//создаем стили для общего блока input полей
 const Controls = styled.div`
-  //использую flex
-  display: flex;
-  //разрешаю перенос строк
-  flex-wrap: wrap;
-  //расстояние между элементами
-  gap: 1rem;
-  //отступ снизу
-  margin-bottom: 1rem;
-  //выравнивание текста
-  text-align: left;
+  display: flex; //включаем flex
+  flex-wrap: wrap; //разрешаем перенос строк
+  gap: 1rem; //задаем расстояние между элементами
+  margin-bottom: 1rem; //добавляем отступ снизу
+  text-align: left; //выравниваем текст слева
 `;
 
-//стили одного поля
+//создаем стили одного поля
 const Control = styled.div`
-  //делаю flex
-  display: flex;
-  //элементы колонкой
-  flex-direction: column;
-
+  display: flex; //включаем flex
+  flex-direction: column; //располагаем элементы колонкой
   label {
-    //жирный текст
-    font-weight: bold;
-    //отступ снизу
-    margin-bottom: 0.5rem;
+    font-weight: bold; //делаем текст жирным
+    margin-bottom: 0.5rem; //добавляем отступ снизу
   }
-
   input {
-    //наследую шрифт
-    font: inherit;
-    //внутренний отступ
-    padding: 0.5rem;
-    //скругление
-    border-radius: 6px;
-    //граница
-    border: 1px solid #ccc;
-    //ширина поля
-    width: 20rem;
-    //максимальная ширина
-    max-width: 100%;
+    font: inherit; //наследуем шрифт
+    padding: 0.5rem; //внутренний отступ
+    border-radius: 6px; //скругляем углы
+    border: 1px solid #ccc; //добавляем границу
+    width: 20rem; //задаем ширину поля
+    max-width: 100%; //ограничиваем ширину
   }
 `;
 
-//стили блока кнопки
+//создаем стили блока кнопки
 const Actions = styled.div`
-  //кнопка справа
-  text-align: right;
-  //занимает всю ширину
-  width: 100%;
+  text-align: right; //выравниваем кнопку справа
+  width: 100%; //задаем ширину на всю строку
 `;
 
-//компонент формы
+//создаем компонент формы
 const ExpenseForm = ({ onGet }) => {
-  //создаю состояние для input полей
+  //создаем состояние для input полей
   const [userInputs, setUserInputs] = useState({
-    //начальное значение title
-    title: '',
-    //начальное значение price
-    price: '',
-    //начальное значение date
-    date: ''
+    title: '', //начальное значение title
+    price: '', //начальное значение price
+    date: '' //начальное значение date
   });
 
-  //обработка изменения input
+  //создаем функцию изменения input
   const InputChangeHandler = (e) => {
-    //получаю name и value поля
+    //получаем name и value поля
     const { name, value } = e.target;
 
-    //обновляю состояние
+    //обновляем состояние
     setUserInputs((prev) => ({
-      //оставляю старые значения
-      ...prev,
-      //обновляю только измененное поле
-      [name]: value
+      ...prev, //оставляем старые значения
+      [name]: value //обновляем только измененное поле
     }));
   };
 
-  //обработка отправки формы
+  //создаем функцию отправки формы
   const submitHandler = (e) => {
-    //отменяю перезагрузку страницы
+    //отменяем перезагрузку страницы
     e.preventDefault();
-    //передаю данные в родительский компонент
+
+    //передаем данные в родительский компонент
     onGet({
-      //название
-      title: userInputs.title,
-      //цена
-      price: +userInputs.price,
-      //дата
-      date: new Date(userInputs.date)
+      title: userInputs.title, //передаем название
+      price: +userInputs.price, //преобразуем цену в число
+      date: new Date(userInputs.date) //создаем объект даты
     });
 
-    //очищаю форму после отправки
+    //очищаем форму после отправки
     setUserInputs({
       title: '',
       price: '',
@@ -105,26 +79,24 @@ const ExpenseForm = ({ onGet }) => {
     });
   };
 
-  //возвращаю форму
+  //возвращаем интерфейс
   return (
-    //обработка submit
+    //создаем форму и привязываем submit
     <form onSubmit={submitHandler}>
       <Controls>
         <Control>
-          {/*подпись поля*/}
+          {/*выводим подпись title*/}
           <label>Title</label>
           <input
-            //имя поля
-            name="title"
-            //тип input
-            type="text"
-            //связь со state
-            value={userInputs.title}
-            //обработка ввода
-            onChange={InputChangeHandler}
+            name="title" //имя поля
+            type="text" //тип поля
+            value={userInputs.title} //связываем со state
+            onChange={InputChangeHandler} //обрабатываем ввод
           />
         </Control>
+
         <Control>
+          {/*выводим подпись price*/}
           <label>Price</label>
           <input
             name="price"
@@ -133,7 +105,9 @@ const ExpenseForm = ({ onGet }) => {
             onChange={InputChangeHandler}
           />
         </Control>
+
         <Control>
+          {/*выводим подпись date*/}
           <label>Date</label>
           <input
             name="date"
@@ -142,8 +116,9 @@ const ExpenseForm = ({ onGet }) => {
             onChange={InputChangeHandler}
           />
         </Control>
+
         <Actions>
-          {/*кнопка отправки*/}
+          {/*отображаем кнопку отправки*/}
           <Button>
             Add Expense
           </Button>
@@ -153,5 +128,5 @@ const ExpenseForm = ({ onGet }) => {
   );
 };
 
-//экспорт компонента
+//экспортируем компонент
 export default ExpenseForm;

@@ -1,21 +1,21 @@
-//импорт react
+//импортируем react
 import React from 'react';
-//импорт react dom
+//импортируем react dom для рендера приложения
 import ReactDOM from 'react-dom/client';
-//импорт глобальных стилей
+//импортируем глобальные стили
 import './index.css';
-//импорт главного компонента
+//импортируем главный компонент App
 import App from './App';
 
-//нахожу root элемент в html
+//находим root элемент в html
 const root = ReactDOM.createRoot(
-  document.getElementById('root')
+  document.getElementById('root') //получаем элемент root
 );
 
-//рендер приложения
+//запускаем рендер приложения
 root.render(
   <React.StrictMode>
-    {/*запускаю главный компонент*/}
+    {/*запускаем главный компонент*/}
     <App />
   </React.StrictMode>
 );

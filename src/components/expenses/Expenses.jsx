@@ -1,62 +1,59 @@
-//импорт useState для хранения выбранного года
-import { useState } from 'react';
-//импорт styled-components для стилей
+//импортируем useState для хранения выбранного года
+import { useState } from 'react'
+//импортируем styled-components для написания стилей
 import styled from 'styled-components';
-//импорт карточки
+//импортируем карточку
 import Card from "../ui/Card";
-//импорт фильтра по году
+//импортируем фильтр по году
 import ExpenseFilter from './ExpenseFilter';
-//импорт одной карточки расхода
+//импортируем компонент одной траты
 import ExpenseItem from "./ExpenseItem";
 
-//создаю компонент со стилями на основе Card
+//создаем стилизованный компонент на основе Card
 const StyledCard = styled(Card)`
-  //внутренний отступ
-  padding: 1rem;
-  //ширина блока
-  width: 50rem;
-  //отступ сверху и по центру
-  margin: 2rem auto;
-  //цвет фона
-  background-color: rgb(22, 22, 21);
-  //максимальная ширина для адаптива
-  max-width: 95%;
+  padding: 1rem; //добавляем внутренний отступ
+  width: 50rem; //задаем ширину блока
+  margin: 2rem auto; //делаем отступ сверху и центрируем блок
+  background-color: rgb(22, 22, 21); //задаем темный фон
+  max-width: 95%; //ограничиваем ширину для адаптива
 `;
 
-//создаю компонент expenses
+//создаем компонент expenses
 const Expenses = (props) => {
-  //состояние для выбранного года
+  //создаем состояние для выбранного года
   const [filteredYear, setFilteredYear] = useState('all');
-  //функция срабатывает когда меняется select
+  //создаем функцию изменения фильтра
   const filterChangeHandler = (event) => {
-    //беру выбранный год и сохраняю в состояние
+    //получаем выбранный год и сохраняем в состояние
     setFilteredYear(event.target.value);
   };
 
-  //если выбран all показываю все расходы иначе фильтрую по выбранному году с помощью тернарного оператора
+  //создаем переменную отфильтрованных расходов
   const filteredExpenses =
+    //если выбран all показываем все расходы
     filteredYear === 'all'
       ? props.expenses
+      //иначе фильтруем массив расходов (тернарный оператор)
       : props.expenses.filter((expense) => {
-          //сравниваю год расхода с выбранным годом
+          //сравниваем год расхода с выбранным годом
           return expense.date.getFullYear().toString() === filteredYear;
         });
 
-  //возвращаю интерфейс
+  //возвращаем интерфейс
   return (
-    //общая карточка для всех расходов
+    //отображаем общую карточку расходов
     <StyledCard>
-      {/*передаю функцию изменения фильтра*/}
+      {/*передаем функцию изменения фильтра*/}
       <ExpenseFilter onChange={filterChangeHandler} />
-      {/*перебираю массив расходов*/}
+      {/*перебираем массив расходов*/}
       {filteredExpenses.map((el) => (
-        //для каждого объекта создаю карточку расхода
+        //для каждого элемента создаем карточку расхода
         <ExpenseItem
-          //уникальный ключ для react
+          //передаем уникальный ключ
           key={el.id}
-          //передаю весь объект расхода
+          //передаем объект расхода
           expense={el}
-          //передаю функцию удаления
+          //передаем функцию удаления
           onDelete={props.onDeleteExpense}
         />
       ))}
@@ -64,5 +61,6 @@ const Expenses = (props) => {
   );
 };
 
-//экспорт компонента
+
+//экспортируем компонент
 export default Expenses;

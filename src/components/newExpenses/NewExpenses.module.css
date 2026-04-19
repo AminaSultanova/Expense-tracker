@@ -1,34 +1,42 @@
+/*создаем стили блока добавления расходов*/
 .new-expense { 
- background-color: #a892ee; 
- padding: 1rem; 
- margin: 2rem auto; 
- width: 50rem; 
- max-width: 95%; 
- border-radius: 12px; 
- text-align: center; 
- box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25); 
+ background-color: #a892ee;  /*задаем фон блока*/
+ padding: 1rem; /*добавляем внутренний отступ*/
+ margin: 2rem auto; /*делаем отступ сверху и центрируем блок*/
+ width: 50rem; /*задаем ширину блока*/
+ max-width: 95%; /*ограничиваем ширину для адаптива*/
+ border-radius: 12px; /*скругляем углы*/
+ text-align: center; /*выравниваем текст по центру*/
+ box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25); /*добавляем тень*/
 } 
+
+/*создаем стили кнопки внутри блока*/
 .new-expense button { 
- font: inherit; 
- cursor: pointer; 
- padding: 1rem 2rem; 
- border: 1px solid #40005d; 
- background-color: #40005d; 
- color: white; 
- border-radius: 12px; 
- margin-right: 1rem; 
+ font: inherit; /*наследуем шрифт*/
+ cursor: pointer; /*меняем курсор при наведении*/
+ padding: 1rem 2rem; /*добавляем внутренние отступы*/
+ border: 1px solid #40005d; /*добавляем границу*/
+ background-color: #40005d; /*задаем фон кнопки*/
+ color: white;  /*делаем текст белым*/
+ border-radius: 12px; /*скругляем углы кнопки*/
+ margin-right: 1rem; /*добавляем отступ справа*/
 } 
+
+/*стили при наведении и нажатии*/
 .new-expense button:hover, 
 .new-expense button:active { 
- background-color: #510674; 
- border-color: #510674; 
+ background-color: #510674; /*меняем фон кнопки*/
+ border-color: #510674; /*меняем цвет границы*/
 } 
+
+/*стили альтернативной кнопки*/
 .new-expense button.alternative { 
- color: #220131; 
- border-color: transparent; 
- background-color: transparent; 
+ color: #220131; /*задаем цвет текста*/
+ border-color: transparent; /*делаем границу прозрачной*/
+ background-color: transparent; /*делаем фон прозрачным*/
 } 
+/*эффект наведения для альтернативной кнопки*/
 .new-expense button.alternative:hover, 
 .new-expense button.alternative:active { 
- background-color: #ddb3f8; 
+ background-color: #ddb3f8; /*меняем фон при наведении*/
 }
